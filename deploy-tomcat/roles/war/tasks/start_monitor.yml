@@ -1,0 +1,5 @@
+---
+
+- name: "start zabbix monitor for {{app}}"
+  shell: "mv /etc/zabbix/scripts/tomcat-{{app}}_health.sh_bak /etc/zabbix/scripts/tomcat-{{app}}_health.sh || /bin/true"
+

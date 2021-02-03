@@ -1,0 +1,36 @@
+---
+
+- name: "stop service: {{app}}"
+  shell: "chdir={{base_dir}}/{{app}}/bin sh shutdown.sh || /bin/true"
+  notify: wait 2 seconds
+
+- meta: flush_handlers
+
+- name: "backup code: {{app}}"
+  shell: "mv -v {{base_dir}}/{{app}}/webapps/ROOT.war {{base_dir}}/{{bak_dir}}/{{app}}/{{service}}.war_`date +%Y%m%d-%H%M%S` || /bin/true"
+  ignore_errors: True
+  register: bak_out
+
+- name: show backup result
+  debug: var=bak_out.stdout verbosity=0
+
+- name: "clean temp file for {{app}}"
+  file:
+    path: "{{base_dir}}/{{app}}/{{item}}"
+    state: absent
+  with_items:
+    - "work/Catalina"
+    - "webapps/ROOT"
+
+- name: "move {{app}} catlina.out log"
+  shell: "chdir={{base_dir}}/{{app}}/logs mv catalina.out catalina.out_`date +%Y%m%d-%H%M%S` || /bin/true"
+
+- name: "update file for {{app}}"
+  shell: "cp -f /tmp/{{update_file}} {{base_dir}}/{{app}}/webapps/ROOT.war"
+
+- name: "start service: {{app}}"
+  shell: "chdir={{base_dir}}/{{app}}/bin nohup sh startup.sh &"
+  notify: wait 20 seconds
+
+- meta: flush_handlers
+

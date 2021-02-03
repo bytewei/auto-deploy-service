@@ -1,0 +1,37 @@
+---
+# deploy tomcat war file. version 2.0
+
+- name: prepaire work
+  hosts: "{{host}}"
+  gather_facts: no
+  vars_files:
+    - "{{app}}-{{env}}.json"
+
+  roles:
+    - prepair
+
+- name: deploy tomcat war
+  hosts: "{{host}}"
+  serial: "50%"
+  gather_facts: no
+  vars_files:
+    - "{{app}}-{{env}}.json"
+
+  roles:
+    - war
+
+- name: deploy front files from war 
+  hosts: nginx-zhuzhan
+  gather_facts: no
+
+  roles:
+    - front
+
+- name: clean work
+  hosts: "{{host}}"
+  gather_facts: no
+  vars_files:
+    - "{{app}}-{{env}}.json"
+
+  roles:
+    - clean

@@ -1,0 +1,28 @@
+---
+
+- name: "online to consul for {{app}}"
+  uri:
+    url: "http://{{consul}}/v1/kv/upstreams/{{service}}/{{ansible_ssh_host}}:{{httpport}}?token={{token}}"
+    method: PUT
+    body: '{"weight": {{weight | to_json}}, "max_fails":2, "fail_timeout":10, "down":0}'
+    status_code: 200, 201
+  connection: local
+
+- name: "online to consul for cas"
+  uri:
+    url: "http://{{consul}}/v1/kv/upstreams/cas/{{ansible_ssh_host}}:{{httpport}}?token={{token}}"
+    method: PUT
+    body: '{"weight": {{weight | to_json}}, "max_fails":2, "fail_timeout":10, "down":0}'
+    status_code: 200, 201
+  connection: local
+  when: service == 'tutor'
+
+- name: "online to consul for sx"
+  uri:
+    url: "http://{{consul}}/v1/kv/upstreams/sx/{{ansible_ssh_host}}:{{httpport}}?token={{token}}"
+    method: PUT
+    body: '{"weight": {{weight | to_json}}, "max_fails":2, "fail_timeout":10, "down":0}'
+    status_code: 200, 201
+  connection: local
+  when: service == 'eduplan'
+

@@ -1,0 +1,59 @@
+{
+  "app": "test-jar02",
+  "port": "9102",
+  "base_dir": "/home/test01",
+  "bak_dir": "backup_code",
+  "log_dir": "logs",
+  "start_log": "catalina.out",
+  "url": "/actuator/health",
+
+  "default": {
+    "xmx": "512M",
+    "xms": "512M",
+    "params": [
+      "-XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=./heapdump.hprof",
+      "-XX:+PrintClassHistogram -XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintHeapAtGC",
+      "-Xloggc:./gc.log"
+    ]
+  },
+
+  "env01": {
+    "xmx": "512M",
+    "xms": "512M",
+    "params": [
+      "-XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=./heapdump.hprof",
+      "-XX:+PrintClassHistogram -XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintHeapAtGC",
+      "-Xloggc:./gc.log"
+    ]
+  },
+  "env02": {
+    "xmx": "512M",
+    "xms": "512M",
+    "params": [
+      "-Dapplication.dir=$base_dir/$app",
+      "-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=58888",    
+      "-XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=./heapdump.hprof",
+      "-XX:+PrintClassHistogram -XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintHeapAtGC",
+      "-Xloggc:./gc.log"
+    ]
+  },
+  "envpre": {
+    "xmx": "1024M",
+    "xms": "1024M",
+    "params": [
+      "-XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=./heapdump.hprof",
+      "-XX:+PrintClassHistogram -XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintHeapAtGC",
+      "-Xloggc:./gc.log"
+    ]
+  },
+  "envprd": {
+    "xmx": "2048M",
+    "xms": "2048M",
+    "params": [
+      "-XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=./heapdump.hprof",
+      "-XX:+PrintClassHistogram -XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintHeapAtGC",
+      "-Xloggc:./gc.log"
+    ]
+  }
+}
+

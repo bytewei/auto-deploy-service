@@ -1,0 +1,10 @@
+---
+
+- name: wait 2 seconds
+  pause: seconds=2
+
+- name: wait 10 seconds
+  pause: seconds=10
+
+- name: wait 20 seconds
+  pause: seconds=20

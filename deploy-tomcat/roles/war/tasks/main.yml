@@ -1,0 +1,9 @@
+---
+
+- include: offline.yml
+- include: stop_monitor.yml
+- include: deploy.yml
+- include: check.yml
+- include: start_monitor.yml
+- include: online.yml
+

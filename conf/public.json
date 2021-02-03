@@ -1,0 +1,40 @@
+{
+  "nacos": {
+    "env01": {
+      "ip": "192.168.20.10:8848",
+      "namespace": "f24e2fb4-xxxx-448b-nnnn-882bdd107xyz"
+    },
+    "env02": {
+      "ip": "192.168.20.11:8848,,,,
+      "namespace": "8a87e535-xxxx-45b0-nnnn-2e57c9563xyz"
+    },
+    "envpre": {
+      "ip": "192.168.30.10:8848",
+      "namespace": "01cd2de7-xxxx-4d01-nnnn-f53b8ec49xyz"
+    },
+    "envprd": {
+      "ip": "192.168.30.11:8848",
+      "namespace": "fe371521-xxxx-49d8-nnnn-632966e13xyz"
+    }
+  },
+
+  "consul": {
+    "env21": {
+      "ip": "192.168.40.10:8500",
+      "token": "d2cc7f03-xxxx-7c22-nnnn-c2b798c49xyz"
+    },
+    "env2": {
+      "ip": "192.168.40.11:8500",
+      "token": "62db3f9b-xxxx-2dd8-nnnn-7c97ce301xyz"
+    },
+    "envpre": {
+      "ip": "192.168.50.10:9500",
+      "token": "beb71bcb-xxxx-1425-nnnn-5e0615c97xyz"
+    },
+    "envprd": {
+      "ip": "192.168.50.10:8500",
+      "token": "d23461b3-xxxx-540a-nnnn-54dca0301xyz"
+    }
+  }
+}
+

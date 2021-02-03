@@ -1,0 +1,25 @@
+---
+
+- name: "grep {{app}} key log every 5 seconds, max 100 times"
+  shell: "grep 'Server startup in' {{base_dir}}/{{app}}/logs/catalina.out"
+  register: result
+  until: result.stdout.find("Server startup in") != -1
+  retries: 100
+  delay: 5
+
+- name: show key log
+  debug: var=result.stdout verbosity=0
+
+- name: check service healthy
+  uri:
+    url: "http://127.0.0.1:{{httpport}}{{url}}"
+    method: GET
+    status_code: 200
+  register: check_out
+  until: check_out.status == 200
+  retries: 3
+  delay: 2
+
+- name: show check healthy result
+  debug: var=check_out.json.message
+

@@ -1,0 +1,16 @@
+---
+
+- name: "clean temp files at local"
+  file:
+    path: "{{item.src}}"
+    state: absent
+  with_items:
+    - { src: "{{data_dir}}/nginx-{{app}}" }
+    - { src: "{{data_dir}}/{{update_file}}" }
+  run_once: true
+  connection: local
+
+- name: "delete file /tmp/{{update_file}} to remote"
+  file:
+    path: "/tmp/{{update_file}}"
+    state: absent

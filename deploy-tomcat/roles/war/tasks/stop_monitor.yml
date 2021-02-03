@@ -1,0 +1,8 @@
+---
+
+- name: "stop zabbix monitor for {{app}}"
+  shell: "mv /etc/zabbix/scripts/tomcat-{{app}}_health.sh /etc/zabbix/scripts/tomcat-{{app}}_health.sh_bak || /bin/true"
+  notify: wait 10 seconds
+
+- meta: flush_handlers
+

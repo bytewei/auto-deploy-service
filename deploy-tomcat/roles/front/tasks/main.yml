@@ -1,0 +1,15 @@
+---
+
+- name: "check directory nginx-{{app}}/WEB-INF/classes/META-INF/resources exits at local"
+  stat:
+    path: "{{data_dir}}/nginx-{{app}}/WEB-INF/classes/META-INF/resources"
+  register: stat_result
+  connection: local
+
+- name: "update front files WEB-INF/classes/META-INF/resources/* to remote"
+  synchronize:
+    src: "{{data_dir}}/nginx-{{app}}/WEB-INF/classes/META-INF/resources/"
+    dest: "/data/static/"
+    compress: yes
+  when: stat_result.stat.exists
+

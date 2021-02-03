@@ -1,0 +1,33 @@
+---
+
+- name: "remove nginx-{{app}} at local"
+  file:
+    path: "{{data_dir}}/nginx-{{app}}"
+    state: absent
+  run_once: true
+  connection: local
+
+- name: "create directory nginx-{{app}} at local"
+  file:
+    path: "{{data_dir}}/nginx-{{app}}"
+    state: directory
+  run_once: true
+  connection: local
+
+- name: "unarchive war file: {{app}} at local"
+  unarchive:
+    src: "{{data_dir}}/{{update_file}}"
+    dest: "{{data_dir}}/nginx-{{app}}"
+    remote_src: yes
+  run_once: true
+  connection: local
+
+- name: "create directory for {{app}} to remote"
+  file:
+    path: "{{base_dir}}/{{bak_dir}}/{{app}}"
+    state: directory
+
+- name: "distribute code file for {{app}} to remote"
+  copy:
+    src: "{{data_dir}}/{{update_file}}"
+    dest: "/tmp/{{update_file}}"
