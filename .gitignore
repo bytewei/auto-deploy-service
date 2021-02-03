@@ -1,1 +1,4 @@
-.idea
+auto-deploy-service/.idea/inspectionProfiles
+auto-deploy-service/.idea/deploy-master.iml
+auto-deploy-service/.idea/misc.xml
+auto-deploy-service/.idea/modules.xml
